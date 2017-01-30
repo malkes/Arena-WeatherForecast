@@ -5,14 +5,12 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.malkes.weatherforecast"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        renderscriptTargetApi 25
-        renderscriptSupportModeEnabled true
 
         buildConfigField "String", "DARK_SKY_KEY", '"d7f486874612a4f9ef6c47a051815de8"'
         buildConfigField "String", "GOOGLE_API_KEY", '"AIzaSyDT0RWmiN_6LVFj2alMjGK0lNPh_8QsKk8"'
@@ -31,6 +29,12 @@ android {
                     'src/main/res-screen/forecast',
                     'src/main/res-screen/cities'
             ]
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(output.outputFile.parent, "Arena-Weather-" + variant.buildType.name + "-" + versionName + ".apk")
         }
     }
 }
